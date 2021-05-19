@@ -1,0 +1,14 @@
+{
+  "name": "question1",
+  "version": "1.0.0",
+  "description": "creating an express server",
+  "main": "question01.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Web Server"
+  ],
+  "author": "Eunice Kamau",
+  "license": "ISC"
+}
