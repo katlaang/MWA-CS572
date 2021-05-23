@@ -131,38 +131,46 @@ module.exports.driverFullUpdateOne = function (req, res) {
             console.log("Error finding driver");
             res.status = 500;
             response.message = err;
-        }else if(!driver){
-            response.status=400;
+        } else if (!driver) {
+            response.status = 400;
             response.message = { "message": "Driver Id not found" }
         }
 
-        if(response.status!==204){
+        if (response.status !== 204) {
             res.status(response.status).json(response.message);
-        }else{
+        } else {
             console.log("updating")
             //update the driver
-            driver.name=req.body.name;
+            driver.name = req.body.name;
             driver.country = req.body.country;
             driver.age = parseInt(req.body.age);
             driver.currentTeam = req.body.currentTeam;
             driver.startingYear = parseInt(req.body.startingYear);
             driver.currentStatus = req.body.currentStatus
-            driver.save(function(err, updatedDriver){
-        if(err){
-            if (err.name == "ValidationError") {
-                console.error("Validation Error: ", err);
-                res.status(422).json(err);
-            }
-            console.log("There was an error");
-            response.status=500;
-            response.message=err;
-            res.status(response.status).json(response.message);
-        }else{
-            console.log("updated");
-            return res.status(response.status).json({ message: "Success" });
+            driver.save(function (err, updatedDriver) {
+                if (err) {
+                    if (err.name == "ValidationError") {
+                        console.error("Validation Error: ", err);
+                        res.status(422).json(err);
+                    }
+                    console.log("There was an error");
+                    response.status = 500;
+                    response.message = err;
+                    res.status(response.status).json(response.message);
+                } else {
+                    console.log("updated");
+                     res.status(response.status).json({ message: "Success" });
 
-        }
+                }
             });
         }
     });
+};
+
+module.exports.driverPartialUpdateOne= function(req, res){
+    console.log("driver partial update");
+    const driverId= req.params.driverId;
+    Driver.findById(driverId).exec(function(err, driver){
+        
+    })
 }
