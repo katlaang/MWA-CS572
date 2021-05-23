@@ -139,15 +139,15 @@ module.exports.driverFullUpdateOne = function (req, res) {
         if(response.status!==204){
             res.status(response.status).json(response.message);
         }else{
+            console.log("updating")
             //update the driver
             driver.name=req.body.name;
             driver.country = req.body.country;
             driver.age = parseInt(req.body.age);
-            diver.currentTeam = req.body.currentTeam;
+            driver.currentTeam = req.body.currentTeam;
             driver.startingYear = parseInt(req.body.startingYear);
             driver.currentStatus = req.body.currentStatus
-        }
-
+            driver.save(function(err, updatedDriver){
         if(err){
             if (err.name == "ValidationError") {
                 console.error("Validation Error: ", err);
@@ -162,5 +162,7 @@ module.exports.driverFullUpdateOne = function (req, res) {
             return res.status(response.status).json({ message: "Success" });
 
         }
+            });
+        }
     });
-};
+}
