@@ -169,8 +169,92 @@ module.exports.driverFullUpdateOne = function (req, res) {
 
 module.exports.driverPartialUpdateOne= function(req, res){
     console.log("driver partial update");
+    console.log(req.body);
     const driverId= req.params.driverId;
     Driver.findById(driverId).exec(function(err, driver){
-        
-    })
-}
+        const response = {
+            status: 204,
+            message: `DRiver with id ${driverId} was updated`
+        }
+        if (err) {
+            console.log("Error finding driver");
+            res.status = 500;
+            response.message = err;
+        } else if (!driver) {
+            response.status = 400;
+            response.message = { "message": "Driver Id not found" }
+        }
+
+        if (response.status !== 204) {
+            res.status(response.status).json(response.message);
+        } else {
+
+            //update the driver
+
+            if (req.body.name) {
+                driver.name = req.body.name;
+
+            }
+            if (req.body.country) {
+                driver.country = req.body.country;
+            }
+
+            if (req.body.age) {
+                driver.age = parseInt(req.body.age);
+            }
+
+            if (req.body.currentTeam) {
+                driver.currentTeam = req.body.currentTeam;
+            }
+
+            if (req.body.startingYear) {
+                driver.startingYear = parseInt(req.body.startingYear);
+            }
+            if (req.body.currentStatus) {
+                driver.currentStatus = req.body.currentStatus
+            }
+            driver.save(function (err, updatedDriver) {
+                if (err) {
+                    if (err.name == "ValidationError") {
+                        console.error("Validation Error: ", err);
+                        res.status(422).json(err);
+                    }
+                    console.log("There was an error");
+                    response.status = 500;
+                    response.message = err;
+                    res.status(response.status).json(response.message);
+                } else {
+                    console.log("updated");
+                    res.status(response.status).json({ message: "Success" });
+
+                }
+                
+            });
+        }
+
+    });
+};
+
+
+module.exports.driverDelete= function(req, res){
+    console.log("deleting driver");
+    console.log(req.body);
+    const driverId= req.param.driverId;
+
+    Driver.findByIdAndDelete(driverId).exec(function(err, deletedDriver){
+        const response = {
+            status: 200,
+            message:deletedDriver
+        }
+        if (err) {
+            console.log("Error finding driver");
+            res.status = 500;
+            response.message = err;
+        } else if (!deletedDriver) {
+            response.status = 404;
+            response.message = { "message": "Driver Id not found" }
+        }
+
+        res.status(response.status).json({ message: "Delete successful" });
+    });
+};

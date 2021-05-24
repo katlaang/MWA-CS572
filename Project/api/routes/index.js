@@ -13,7 +13,8 @@ router.route("/drivers")
 
 router.route("/drivers/:driverId")
     .get(driverController.driverGetOne)
-    .put(driverController.driverFullUpdateOne);
+    .put(driverController.driverFullUpdateOne)
+    .patch(driverController.driverPartialUpdateOne);
 
 
-    module.exports=router;
+module.exports=router;// Do not forget!!
