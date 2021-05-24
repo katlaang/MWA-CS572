@@ -66,3 +66,4 @@ const driverSchema = new mongoose.Schema({
 
 driverSchema.plugin(uniqueValidator)
 mongoose.model("Driver", driverSchema);
+mongoose.model("Standings", standingSchema);

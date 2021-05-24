@@ -3,7 +3,7 @@ require("./driver-model.js");
 const dbName = "meanRacing";
 const dbURL = "mongodb://localhost:27017/" + dbName;
 
-mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(dbURL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 
 
 process.on("SIGINT", function () {

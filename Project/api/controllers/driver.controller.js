@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Driver = mongoose.model("Driver");
 
-//require("./standings.controller");
+require("./standings.controller");
 
 module.exports.driversGetAll = function (req, res) {
 
@@ -239,11 +239,11 @@ module.exports.driverPartialUpdateOne= function(req, res){
 module.exports.driverDelete= function(req, res){
     console.log("deleting driver");
     console.log(req.body);
-    const driverId= req.param.driverId;
+    const driverId= req.params.driverId;
 
     Driver.findByIdAndDelete(driverId).exec(function(err, deletedDriver){
         const response = {
-            status: 200,
+            status: 204,
             message:deletedDriver
         }
         if (err) {
@@ -254,7 +254,8 @@ module.exports.driverDelete= function(req, res){
             response.status = 404;
             response.message = { "message": "Driver Id not found" }
         }
-
+      
         res.status(response.status).json({ message: "Delete successful" });
+        
     });
 };
