@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Driver = mongoose.model("Driver");
-
 require("./standings.controller");
 
 module.exports.driversGetAll = function (req, res) {

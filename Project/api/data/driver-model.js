@@ -29,7 +29,7 @@ const standingSchema = new mongoose.Schema({
     totalChampionshipWins: {
         type: Number,
         reuired: true, default: 0
-    }
+    },
 
 });
 
@@ -65,5 +65,6 @@ const driverSchema = new mongoose.Schema({
 });
 
 driverSchema.plugin(uniqueValidator)
+standingSchema.plugin(uniqueValidator)
 mongoose.model("Driver", driverSchema);
 mongoose.model("Standings", standingSchema);
