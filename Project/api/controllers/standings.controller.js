@@ -5,7 +5,8 @@ const Driver = mongoose.model("Driver");
 module.exports.standingsGetAll = function (req, res) {
     console.log("Get all standings for a game");
     const driverId = req.params. driverId;
-   Driver.findById(driverId).select("standings").exec(function (err, driver) {
+   Driver.findById(driverId).select("standing").exec(function (err, driver) {
+       const standing= driver.standing;
         const response = {
             status: 200,
             message: ""
@@ -20,10 +21,10 @@ module.exports.standingsGetAll = function (req, res) {
             response.status = 404;
             response.message = { "message": " driver Id not found " +  driverId };
         } else {
-            response.message = driver.standings;
+            response.message = driver.standing ? driver.standing : [];
         }
-       console.log("GET publishers with gameid",  driverId);
-        res.status(response.status).json(response.message);
+       console.log("GET drivers with driverid",  driverId);
+       res.status(response.status).json(response.message);
 
     });
 };
@@ -31,23 +32,26 @@ module.exports.standingsGetAll = function (req, res) {
 module.exports.standingsGetOne= function(req, res){
     console.log("get one standing record for a driver");
     const driverId= req.params.driverId;
-    const standingId= req.params.standingId;
-    Driver.findOne(driverId).select("standings").exec(function(err, driver){
+    //const standingId= req.params.standingId;
+    Driver.find({"driverId":driverId}).select("standing").exec(function(err, driver){
         const response = {
             status: 200,
             message: ""
 
         }
         if (!driver) {
-            res.status = 404;
-            return res.send({ error: 'Not found' });
+            console.log("Error find driver in database with id : ", driverId);
+            respose.status = 404;
+           response.message= {message: "Driver not found"};
         }
         if (!err) {
-            return res.send({ status: "OK", standings: driver.standing[0]});
+           response.message=driver.standing? driver.standing: [];
         } else {
-            res.status = 500;
+            console.log("Error finding driver");
+            response.status=500;
+            response.message=err
         }
-        res.status(200).json(driver.standing);
+        res.status(response.status).json(response.message);
     });
 };
 
@@ -204,15 +208,22 @@ const _partialUpdateStanding = function (req, res, driver) {
     console.log("game to update" + driver);
     console.log("req.body", req.body);
     //update
-    driver.standing.totalWins = req.body.totalWins;
-    driver.standing.totalPolePositions = req.body.totalPolePositions
-    driver.standing.totalStarts = req.body.totalStarts
-    driver.standing.totalRaceEntries = req.body.totalRaceEntries
-    driver.standing.totalRaceFinishes = req.body.totalRaceFinishes
-    driver.standing.totalPodiumFinishes = req.body.totalPodiumFinishes
-    driver.standing.totalChampionshipWins = req.body.totalChampionshipWins
+    if(req.body.totalWins)
+        driver.standing.totalWins = req.body.totalWins;
+    if (req.body.totalPolePositions)
+         driver.standing.totalPolePositions = req.body.totalPolePositions
+    if (req.body.totalStarts)
+         driver.standing.totalStarts = req.body.totalStarts
+    if (req.body.totalRaceEntries)
+        driver.standing.totalRaceEntries = req.body.totalRaceEntries
+    if (req.body.totalRaceFinishes)
+         driver.standing.totalRaceFinishes = req.body.totalRaceFinishes
+    if (req.body.totalPodiumFinishes)
+          driver.standing.totalPodiumFinishes = req.body.totalPodiumFinishes
+    if (req.body.totalChampionshipWins)
+         driver.standing.totalChampionshipWins = req.body.totalChampionshipWins
 
-   driver.save(function (err, updatedGame) {
+   driver.save(function (err, updatedDriver) {
         const response = {
             status: 200,
             message: ""
@@ -222,7 +233,7 @@ const _partialUpdateStanding = function (req, res, driver) {
             response.message = err;
 
         } else {
-            response.message = updatedGame;
+            response.message = updatedDriver;
             console.log("standing updated");
         }
         res.status(response.status).json(response.message);
@@ -232,19 +243,19 @@ const _partialUpdateStanding = function (req, res, driver) {
 
 module.exports.standingDeleteOne = function (req, res) {
     console.log("Delete controller reached");
-    const gameId = req.params.gameId;
-    Game.findById(gameId).select("standing").exec(function (err, game) {
+    const driverId = req.params.driverId;
+    Driver.findById(driverId).select("standing").exec(function (err, driver) {
         const response = {
             status: 204,
             message: "Successful Update!"
         };
         if (err) {
-            console.log("Error finding game");
+            console.log("Error finding driver");
             response.status = 500;
             response.message = err;
 
-        } else if (!game) {
-            console.log("no game");
+        } else if (!driver) {
+            console.log("no driver");
             response.status = 404;
             response.message = { "message": "Game ID not found" };
         }
@@ -254,8 +265,8 @@ module.exports.standingDeleteOne = function (req, res) {
             res.status(response.status).json(response.message);
 
         } else {
-            console.log("Game found");
-            _deleteStanding(req, res, game);
+            console.log("Driver found");
+            _deleteStanding(req, res, driver);
 
         }
 

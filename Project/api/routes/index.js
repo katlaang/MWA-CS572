@@ -21,7 +21,8 @@ router.route("/drivers/:driverId/standings")
     .get(standingsController.standingsGetAll)
     .post(standingsController.standingAddOne)
     .put(standingsController.standingFullUpdate)
-    .patch(standingsController.standingPartialUpdateOne);
+    .patch(standingsController.standingPartialUpdateOne)
+    .delete(standingsController.standingDeleteOne);
 
 router.route("/drivers/:driverId/standings/:standingId")
 .get(standingsController.standingsGetOne);
