@@ -60,11 +60,11 @@ const driverSchema = new mongoose.Schema({
     startingYear:{
         type: Number,
     }, 
-    standings: standingSchema
+    standing: standingSchema
 
 });
 
 driverSchema.plugin(uniqueValidator)
 standingSchema.plugin(uniqueValidator)
 mongoose.model("Driver", driverSchema);
-mongoose.model("Standings", standingSchema);
+mongoose.model("Standing", standingSchema);

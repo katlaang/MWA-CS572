@@ -18,7 +18,13 @@ router.route("/drivers/:driverId")
     .delete(driverController.driverDelete);
 
 router.route("/drivers/:driverId/standings")
-    .get(standingsController.standingsGetAll);
+    .get(standingsController.standingsGetAll)
+    .post(standingsController.standingAddOne)
+    .put(standingsController.standingFullUpdate)
+    .patch(standingsController.standingPartialUpdateOne);
+
+router.route("/drivers/:driverId/standings/:standingId")
+.get(standingsController.standingsGetOne);
 
 
 module.exports = router;// Do not forget!!
