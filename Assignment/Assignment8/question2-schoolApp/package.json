@@ -1,0 +1,21 @@
+{
+  "name": "question2",
+  "version": "1.0.0",
+  "description": "My first app with Mongoose",
+  "main": "app1.js",
+  "scripts": {
+    "start": "node app1.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mongoose"
+  ],
+  "author": "Eunice Myllynen",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.7",
+    "mongoose": "^5.12.10"
+  },
+  "devDependencies": {}
+}
