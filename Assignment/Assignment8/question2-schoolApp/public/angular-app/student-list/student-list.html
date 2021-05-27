@@ -1,0 +1,22 @@
+<h1>{{vm.title}}</h1>
+
+<ul>
+    <li ng-repeat="student in vm.students">
+        <a ng-href="#/students/{{student._id}}">{{student.name}}</a></li>
+</ul>
+
+<form name="vm.studentForm" ng-submit="vm.addStudent()" >
+
+    To add a new game please fill in all the fields below:<BR/>
+
+    Name: <input type="text" name="name" required ng-model="vm.newStudentName" style="color:black"/><BR/>
+
+    GPA: <input type="text" name="gpa" required ng-model="vm.newStudentGpa" style="color:black"/><BR/>
+
+   Student Number: <input type="text" name="studentNumber" required ng-pattern="/^[0-9]{4}$/" ng-model="vm.newStudentNumber" style="color:black"/><BR/>
+    <span ng-show="vm.studentForm.studentNumber.$dirty && vm.studentForm.studentNumber.$invalid && vm.studentForm.isSubmitted" style="color:black">Student Number must be four numbers.</span>
+
+    <BR/>
+    <button type="submit" class="btn-success">Add Student</button><BR/>
+
+</form>
