@@ -1,0 +1,22 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "project",
+    "mongoose"
+  ],
+  "author": "Eunice Myllynen",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.10",
+    "mongoose-unique-validator": "^2.0.3",
+    "nodenpm": "^0.1.6"
+  },
+  "description": ""
+}

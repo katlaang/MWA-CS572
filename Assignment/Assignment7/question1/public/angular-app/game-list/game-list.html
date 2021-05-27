@@ -1,0 +1,20 @@
+<h1> {{vm.title }} </h1>
+
+
+<form class="form-inline">
+    <div class="form-group">
+        <label>Search</label>
+        <input type="text" ng-model="search" class="form-control" placeholder="Search">
+    </div>
+</form>
+
+<table>
+    <tr>
+        <th> Title</th>
+        <th> Year</th>
+    </tr>
+    <tr ng-repeat="game in vm.games | orderBy: '-year' |filter:search"><td><a ng-href = "#/game/{{game._id}}"> 
+        {{ game.title }} </a></td> 
+        <td>{{game.year}}</td>
+    </tr>
+</table>

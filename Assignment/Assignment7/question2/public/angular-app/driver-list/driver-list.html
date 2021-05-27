@@ -1,0 +1,20 @@
+<h1> {{vm.title }} </h1>
+
+
+<form class="form-inline">
+    <div class="form-group">
+        <label>Search</label>
+        <input type="text" ng-model="search" class="form-control" placeholder="Search">
+    </div>
+</form>
+
+<table>
+    <tr>
+        <th> name</th>
+        <th> totalChampionshipWins</th>
+    </tr>
+    <tr ng-repeat="driver in vm.drivers | orderBy: 'name' |filter:search"><td><a ng-href = "#/driver/{{driver._id}}"> 
+        {{ driver.name }} </a></td> 
+        <td>{{driver.standing.totalChampionshipWins}}</td>
+    </tr>
+</table>
