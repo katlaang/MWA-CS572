@@ -1,0 +1,27 @@
+<h1>{{vm.title}}</h1>
+
+<ul>
+    <li ng-repeat="driver in vm.drivers">
+        <a ng-href="#/drivers/{{driver._id}}">{{driver.name}}</a></li>
+</ul>
+
+<form name="vm.driverForm" ng-submit="vm.addDriver()" >
+
+    To add a new Driver, please fill in all the fields below:<BR/>
+
+    Name: <input type="text" name="name" required ng-model="vm.newDriverName" style="color:black"/><BR/>
+    Country: <input type="text" name="country" required ng-model="vm.newDriverCountry" style="color:black" /><BR />
+    Age: <input type="text" name="age" required ng-pattern="/^[0-9]{2}$/" ng-model="vm.newDriverAge" style="color:black"/><BR/>
+    <span ng-show="vm.driverForm.age.$dirty && vm.driverForm.age.$invalid && vm.driverForm.isSubmitted" style="color:black">Age must be two digits.</span>
+    <BR/>
+    Current Status:<input type="text" name="currentStatus" required ng-model="vm.newDriverCurrentStatus" style="color:black" /><BR />
+    Current Team: <input type="text" name="currentTeam" required ng-model="vm.newDriverCurrentTeam" style="color:black" /><BR />
+    Starting Year:<input type="text" name="year" required ng-pattern="/^[0-9]{4}$/" ng-model="vm.newDriverStartingYear" style="color:black" /><BR />
+    <span ng-show="vm.driverForm.startingYear.$dirty && vm.driverForm.startingYear.$invalid && vm.driverForm.isSubmitted"
+        style="color:black">The year must be four digits.</span>
+    <BR />
+
+
+    <button type="submit" class="btn-success">Add Driver</button><BR/>
+
+</form>
