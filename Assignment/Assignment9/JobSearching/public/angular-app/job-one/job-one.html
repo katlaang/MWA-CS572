@@ -1,0 +1,16 @@
+<h1>Information about Formula 1 drivers:</h1>
+
+<p>
+    Title: {{vm.job.title}} <br>
+    Salary: {{vm.job.salary | currency}}<br>
+    Description: {{vm.job.description}}<br>
+    Skills: <ul ng-repeat ="skill in vm.job.skills">
+                      <li>{{skill}}</li>
+    </ul><br>
+    Experience: {{vm.job.experience}} <br>
+    PostDate: {{vm.job.postDate | date: "MM/dd/y" }} <br>
+</p>
+<br>
+<br>
+
+<input type="button" class="btn btn-danger" value= "Delete" ng-click="vm.jobsDeleteOne()"/>

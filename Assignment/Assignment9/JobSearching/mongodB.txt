@@ -1,0 +1,206 @@
+mongoexport --db SchoolDB --collection Students --out output/Students.json --jsonArray --pretty
+
+D:\MIU Courses\CS572 Modern Web Applications\Assignment\Assignment3>
+
+
+mongoexport --db SchoolDB --collection Students
+
+C:\Users\eunic\Downloads>mongorestore --db meanGames --gzip dump/dump/meanGames
+
+ //"mongodb": "^3.6.7",
+
+http://localhost:4000/api/games?lat=32.96999&lng=-96.60308
+
+db.Students.find().pretty()
+{
+        "_id" : ObjectId("60a58c89da156b0edcc712c8"),
+        "name" : "Jack",
+        "gpa" : "3.0"
+}
+{
+        "_id" : ObjectId("60a58c89da156b0edcc712c9"),
+        "name" : "Jim",
+        "gpa" : "2.8"
+}
+{
+        "_id" : ObjectId("60a58c89da156b0edcc712ca"),
+        "name" : "Jill",
+        "gpa" : "3.3"
+}
+
+
+db.students.insert({name:"Jill", gpa:3.3, studentId: 1536, address:{city: "San Francisco", street: "4th Street",state:"California", zipcode: 1123}})
+
+.select("students")
+s
+
+(http://localhost:3000/api/games?offset=3&count=2)
+
+ db.games.find({title:/Saurav/}).pretty()
+
+
+{
+        "rate": 4,
+        "title": "Classic Mancala",
+        "year": 1920,
+        "price": 53.89,
+        "minPlayers": 2,
+        "maxPlayers": 2,
+        "minAge": 7
+         
+    }
+> db.games.find({title:/Scrabble/}).pretty()
+{
+        "_id" : ObjectId("60a8955af125bc5a7c261957"),
+        "rate" : 5,
+        "publisher" : {
+                "_id" : ObjectId("60a8955af125bc5a7c261958")
+        },
+        "title" : "Scrabble",
+        "price" : 20,
+        "year" : 1920,
+        "minPlayers" : 2,
+        "maxPlayers" : 4,
+        "minAge" : 4,
+        "__v" : 0
+}
+>
+
+  "_id" : ObjectId("60a89698f125bc5a7c26195a"),
+        "rate" : 5,
+        "publisher" : {
+                "_id" : ObjectId("60a89698f125bc5a7c26195b")
+        },
+        "title" : "Zingo",
+        "price" : 21.99,
+        "year" : 1999,
+        "minPlayers" : 2,
+        "maxPlayers" : 3,
+        "minAge" : 4,
+        "__v" : 0
+
+
+
+
+        "_id" : ObjectId("60a896e5f125bc5a7c26195c"),
+        "rate" : 4,
+        "publisher" : {
+                "_id" : ObjectId("60a896e5f125bc5a7c26195d")
+        },
+        "title" : "Classic Mancala",
+        "price" : 53.89,
+        "year" : 1920,
+        "minPlayers" : 2,
+        "maxPlayers" : 2,
+        "minAge" : 7,
+        "__v" : 0
+}
+
+
+
+
+
+ newGame.save().then(data=>{
+      console.log("this is data"+data);
+      response.message = game;
+      res.status(response.status).json(response.game);
+    })
+    .catch(err=>{
+      response.status = 500;
+      response.message = err;
+      res.status(response.status).json(response.message);
+    });
+
+
+if(!Object.keys(newGame).length>=3){// check you have at least 3 properties
+      
+        console.log("data missing from body");
+        res.status(400);
+        response.message = json({ err: "Request data missing from post body" });
+        res.status(response.status).json(response.message);
+  
+    }
+
+
+http://www.jonahnisenson.com/tips-on-working-with-embedded-arrays-in-mongoose-mongo/
+
+
+
+   Game.findById(gameId).select("review").exec(function (err, game) {
+        const response = {
+            status: 201,
+            message: game
+        };
+        if (err) {
+            response.status = 500;
+            response.message = err;
+        } else if (!game) {
+            console.log("Game id not fond in database");
+            response.status = 404;;
+            response.message = { "message": "Game id not found: " + gameId };
+        }
+
+        //This decides how to send a response
+        if (game) {
+            _addReview(req, res, game);
+        } else {
+            res.status(response.status).json(response.message);
+        }
+
+    });
+
+
+npm install --save mongoose-unique-validator
+
+if (response.status !== 204) {
+            res.status(response.status).json(response.message);
+
+        } else {
+
+        res.status(response.status).json({ message: "Delete successful" });
+        }
+
+
+
+http://localhost:8181/#/about
+
+python -m http.server 8181
+
+npm install angular angular-route
+
+nodemon app1.js
+
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 40%;
+    }
+
+    th,
+    td {
+        text-align: left;
+        padding: 10px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #192841;
+    }
+</style>
+
+
+<table>
+    <tr>
+        <th> Title</th>
+        <th> Year</th>
+
+
+    </tr>
+
+
+    <tr ng-repeat="game in vm.games | orderBy: '-year' |startFrom:currentPage*pageSize | limitTo:pageSize">
+        <td><a ng-href="#/game/{{game._id}}">
+                {{ game.title }} </a></td>
+        <td>{{game.year}}</td>
+    </tr>
+</table>
