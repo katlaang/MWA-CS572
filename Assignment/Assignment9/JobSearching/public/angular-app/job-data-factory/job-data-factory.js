@@ -9,8 +9,8 @@ function JobDataFactory($http) {
     jobsDeleteOne: jobsDeleteOne,
   };
 
-  function jobsGetAll() {
-    return $http.get("/api/jobs").then(complete).catch(failed);
+  function jobsGetAll(number) {
+    return $http.get("/api/jobs?offset="+number +"&count=5").then(complete).catch(failed);
   }
 
   function jobsGetOne(id) {

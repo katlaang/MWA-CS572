@@ -2,10 +2,11 @@ angular.module("meanJobSearch").controller("JobsController", JobsController);
 
 function JobsController(JobDataFactory, $route, $scope) {
   const vm = this;
+  vm.number=0;
   vm.title = "Mean Job Search App";
   vm.isSubmitted = false;
 
-  JobDataFactory.jobsGetAll().then(function (response) {
+  JobDataFactory.jobsGetAll(vm.pages).then(function (response) {
     vm.jobs = response;
   });
 
@@ -24,10 +25,9 @@ function JobsController(JobDataFactory, $route, $scope) {
   vm.previousPage = function () {
   if (vm.number >= 5)
     vm.number = vm.number - 5;
-  jobDataFactory.getAlljobs(vm.number)
-    .then(function (response) {
-      vm.jobs = response;
-    })
+  jobDataFactory.jobsGetAll(vm.number).then(function (response) {
+    vm.jobs = response;
+  });
   }
 
 
