@@ -7,8 +7,8 @@ module.exports.jobsGetAll = function (req, res) {
   console.log(req.query);
 
   let offset = 0;
-  let count = 10;
-  const maxCount = 15;
+  let count = 5;
+  const maxCount = 10;
 
   if (req.query && req.query.offset) {
     offset = parseInt(req.query.offset);

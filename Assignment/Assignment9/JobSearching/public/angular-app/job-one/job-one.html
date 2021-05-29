@@ -1,4 +1,4 @@
-<h1>Information about Formula 1 drivers:</h1>
+<h1>Information about jobs:</h1>
 
 <p>
     Title: {{vm.job.title}} <br>
@@ -8,9 +8,26 @@
                       <li>{{skill}}</li>
     </ul><br>
     Experience: {{vm.job.experience}} <br>
-    PostDate: {{vm.job.postDate | date: "MM/dd/y" }} <br>
+    PostDate: {{vm.job.postDate | date: "MM/dd/yyyy" }} <br>
 </p>
 <br>
 <br>
+    
+<form name="vm.jobUpdateForm" ng-submit="vm.updateJob()">
+To update a job, please fill in the details below:<br>
 
+Title: <input type="text" name="title" required ng-model="vm.editedJobTitle" style="color:black" /><br>
+Salary: <input type="text" name="salary" required ng-model="vm.editedJobSalary" style="color:black" /> <br>
+Description:<input type="text" name="description" required ng-model="vm.editedJobDescription" style="color:black" /> <br>
+Skills: <input type="text" name="skills" required ng-model="vm.editedJobSkills" style="color:black" /> <br>
+Experience:<input type="text" name="experience" required ng-model="vm.editedJobExperience" style="color:black" /> <br>
+PostDate: <input type="text" name="postDate" required ng-model="vm.editedJobPostDate" style="color:black" /> <br>
+<br>
+<br>
+
+<button type="submit" class="btn-success">Update Job</button>
+
+</form>
+<br>
+<br>
 <input type="button" class="btn btn-danger" value= "Delete" ng-click="vm.jobsDeleteOne()"/>

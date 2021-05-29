@@ -5,6 +5,14 @@
         <a ng-href="#/jobs/{{job._id}}">{{job.title}}</a></li>
 </ul>
 
+
+<div>
+ 
+<button style="color:black"  ng-click="JobsController.previousPage(JobsController.number)">Previous Page</button>
+
+<button style="color:black"  ng-click="JobsController.nextPage(JobsController.number) ">Next Page</button>
+</div>
+
 <form name="vm.jobForm" ng-submit="vm.addJob()" >
 
     To add a new job, please fill in all the fields below:<BR/>

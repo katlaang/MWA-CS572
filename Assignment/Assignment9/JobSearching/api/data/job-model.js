@@ -46,7 +46,10 @@ description:{
     type: String,
     required: true
 },
-  skills: Array, type: String,
+  skills:{
+    type: Array,
+    required: true
+  },
   
 
   experience: {

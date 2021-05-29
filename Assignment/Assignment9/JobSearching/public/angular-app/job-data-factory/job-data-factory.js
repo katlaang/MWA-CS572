@@ -5,6 +5,7 @@ function JobDataFactory($http) {
     jobsGetAll: jobsGetAll,
     jobsGetOne: jobsGetOne,
     jobsAddOne: jobsAddOne,
+    jobEditOne: jobEditOne,
     jobsDeleteOne: jobsDeleteOne,
   };
 
@@ -18,9 +19,17 @@ function JobDataFactory($http) {
       .then(complete)
       .catch(failed);
   }
-
+  function jobEditOne(jobId, job){
+   return $http
+    .put("/api/jobs/" +jobId, job)
+    .then(complete)
+    .catch(failed);
+  }
   function jobsAddOne(job) {
-    return $http.post("/api/jobs/", job).then(complete).catch(failed);
+    return $http
+    .post("/api/jobs/", job)
+    .then(complete)
+    .catch(failed);
   }
 
   function jobsDeleteOne(jobId) {
